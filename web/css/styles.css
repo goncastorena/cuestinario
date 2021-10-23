@@ -1907,12 +1907,12 @@ a:hover.back-to-top {
 
 	/* Details Lightboxes */
 	.lightbox-basic {
-		max-width: 62.5rem;
+		max-width: 75.5rem;
 		padding: 2.5rem 2.5rem 2.5rem 2.5rem;
 	}
 
 	.lightbox-basic .image-container {
-		max-width: 100%;
+		max-width: 60%;
 		margin-right: 2rem;
 		margin-bottom: 0;
 		margin-left: 0.5rem;
