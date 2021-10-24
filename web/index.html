@@ -385,7 +385,7 @@
 
                           <a>Consumo de combustibles</a><br>
                           <div class="form-group">
-                            <select class="form-control-select" id="rselect" required>
+                            <select class="form-control-select" id="rselect1" required>
                                 <option class="select-option" value="" disabled selected>tipo de combustible</option>
                                 <option class="select-option" value="si">gasolina Lt</option>
                                 <option class="select-option" value="neutral">Diesel Lt</option>
@@ -401,17 +401,17 @@
                                 <option class="select-option" value="no">Gas LP Lt</option>
                             </select>
                             <a>Cantidad</a>
-                            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="#####">
+                            <input type="text" class="form-control" id="formGroupExampleInput1" placeholder="#####">
                         </div>
 
                         <div class="form-group">
                             <a>Distancia promedio que viajan tus empleados</a>
-                            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="##### Km">
+                            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="##### Km">
                           </div>
                         
                           <div class="form-group">
                             <a>Cantidad de desechos generados (Toneladas)</a>
-                            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="##### Toneladas">
+                            <input type="text" class="form-control" id="formGroupExampleInput3" placeholder="##### Toneladas">
                           </div>
                         
                           <a class="btn-solid-reg mfp-close page-scroll">ENVIAR</a> <a class="btn-outline-reg mfp-close as-button" href="#screenshots">BACK</a>
@@ -544,7 +544,7 @@
 
 
     <div class="form-group">
-        <button type="submit" class="form-control-submit-button">REQUEST</button>
+        <button type="submit" class="form-control-submit-button" onclick="displaygeneralValue()">REQUEST</button>
     </div>
 
 
@@ -642,4 +642,163 @@
     <script src="js/validator.min.js"></script> <!-- Validator.js - Bootstrap plugin that validates forms -->
     <script src="js/scripts.js"></script> <!-- Custom scripts -->
 </body>
+<script>
+    function escribir_basic(user, energialmp, areas, reciclaje, paper, ecologia,preocup_amb){
+        fetch('https://0i0g45mq2m.execute-api.us-east-1.amazonaws.com/test',{
+            method: "POST",
+
+            body: JSON.stringify({
+                "TableName": "Hack-Cuestionario",
+                "Item":
+                    {
+                        "_id": user,
+                        "energ_lmp":energialmp,
+                        "area_v":areas,
+                        "reclje":reciclaje,
+                        "papel":paper,
+                        "cert_eco":ecologia,
+                        "preoc_amb": preocup_amb
+                    }
+            }),
+            
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+        .then(response => response.json())
+
+        .then(json => console.log(json));
+        };
+</script>
+<script>
+    function escribir_advance(user, kws, gs_cns, gs_qnt, kms_vje, desch_g){
+        fetch('https://0i0g45mq2m.execute-api.us-east-1.amazonaws.com/test',{
+            method: "POST",
+
+            body: JSON.stringify({
+                "TableName": "Hack-Cuestionario",
+                "Item":
+                    {
+                        "_id": user,
+                        "kw_consm":kws,
+                        "gas_consm":gs_cns,
+                        "gas_qnty":gs_qnt,
+                        "km_vje":kms_vje,
+                        "desch_gen":desch_g
+                    }
+            }),
+            
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+        .then(response => response.json())
+
+        .then(json => console.log(json));
+        };
+</script>
+<script>
+    function escribir_general(user,energialmp, areas, reciclaje, paper, ecologia,preocup_amb, kws, gs_cns, gs_qnt, kms_vje, desch_g){
+        fetch('https://0i0g45mq2m.execute-api.us-east-1.amazonaws.com/test',{
+            method: "POST",
+
+            body: JSON.stringify({
+                "TableName": "Hack-Cuestionario",
+                "Item":
+                    {
+                        "_id": user,
+                        "energ_lmp":energialmp,
+                        "area_v":areas,
+                        "reclje":reciclaje,
+                        "papel":paper,
+                        "cert_eco":ecologia,
+                        "preoc_amb": preocup_amb,
+                        "kw_consm":kws,
+                        "gas_consm":gs_cns,
+                        "gas_qnty":gs_qnt,
+                        "km_vje":kms_vje,
+                        "desch_gen":desch_g
+                    }
+            }),
+            
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+        .then(response => response.json())
+
+        .then(json => console.log(json));
+        };
+</script>
+<script>
+    function evaluate(selections) {
+            for(i = 0; i < selections.length; i++) {
+                if(selections[i].checked)
+                    var date = 'Si'
+                else
+                    var date = 'No'
+            }
+            return date
+        }
+</script>
+<script>
+    function displayRadioValue() {
+        var ele0 = document.getElementsByName('inlineRadioOptions');
+        var ele1 = document.getElementsByName('inlineRadioOptions1');
+        var ele2 = document.getElementsByName('inlineRadioOptions2');
+        var ele3 = document.getElementsByName('inlineRadioOptions3');
+        var ele4 = document.getElementsByName('inlineRadioOptions4');
+        
+        var droplst = document.getElementById("rselect");
+        var drp = droplst.value;
+        
+        var res0 = evaluate(ele0)
+        var res1 = evaluate(ele1)
+        var res2 = evaluate(ele2)
+        var res3 = evaluate(ele3)
+        var res4 = evaluate(ele4)
+
+        escribir_basic('user2',res0,res1, res2, res3, res4, drp)
+        }
+</script>
+<script>
+    function displayadvancedValue() {
+
+        var kw = document.getElementById("formGroupExampleInput").value;
+        var gas = document.getElementById("rselect1").value;
+        var qnty = document.getElementById("formGroupExampleInput1").value;
+        var km = document.getElementById("formGroupExampleInput2").value;
+        var dsch = document.getElementById("formGroupExampleInput3").value;
+
+        escribir_advance('user2',kw,gas, qnty, km, dsch)
+        }
+</script>
+
+<script>
+    function displaygeneralValue() {
+        var ele0 = document.getElementsByName('inlineRadioOptions');
+        var ele1 = document.getElementsByName('inlineRadioOptions1');
+        var ele2 = document.getElementsByName('inlineRadioOptions2');
+        var ele3 = document.getElementsByName('inlineRadioOptions3');
+        var ele4 = document.getElementsByName('inlineRadioOptions4');
+        
+        var droplst = document.getElementById("rselect");
+        var drp = droplst.value;
+
+        var kw = document.getElementById("formGroupExampleInput").value;
+        var gas = document.getElementById("rselect1").value;
+        var qnty = document.getElementById("formGroupExampleInput1").value;
+        var km = document.getElementById("formGroupExampleInput2").value;
+        var dsch = document.getElementById("formGroupExampleInput3").value;
+
+        
+        var res0 = evaluate(ele0)
+        var res1 = evaluate(ele1)
+        var res2 = evaluate(ele2)
+        var res3 = evaluate(ele3)
+        var res4 = evaluate(ele4)
+
+        escribir_general('user4',res0,res1, res2, res3, res4, drp,kw,gas, qnty, km, dsch)
+        }
+</script>
 </html>
